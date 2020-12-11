@@ -10,10 +10,8 @@ var corsOptions = {
 	preflightContinue: false,
 	optionsSuccessStatus: 204,
 };
-const productRoutes = require("./api/routes/notes");
 const userRoutes = require("./api/routes/user");
-const notesRoutes = require("./api/routes/testNotesRoutes");
-const test = require("./api/routes/test");
+const notesRoutes = require("./api/routes/notes");
 
 mongoose.connect(
 	"mongodb+srv://KarolP:1236914789Mk@cluster0.mgvy8.mongodb.net/noteRESTapi?retryWrites=true&w=majority",
@@ -44,10 +42,8 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/notes/", notesRoutes);
-app.use("/1", test);
 
 app.use(cors());
 
