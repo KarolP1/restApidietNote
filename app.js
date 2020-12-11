@@ -3,10 +3,17 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
+const cors = require("cors");
+var corsOptions = {
+	origin: "*",
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	preflightContinue: false,
+	optionsSuccessStatus: 204,
+};
 const productRoutes = require("./api/routes/notes");
 const userRoutes = require("./api/routes/user");
 const notesRoutes = require("./api/routes/testNotesRoutes");
+const test = require("./api/routes/test");
 
 mongoose.connect(
 	"mongodb+srv://KarolP:1236914789Mk@cluster0.mgvy8.mongodb.net/noteRESTapi?retryWrites=true&w=majority",
@@ -40,6 +47,9 @@ app.use((req, res, next) => {
 app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/notes/", notesRoutes);
+app.use("/1", test);
+
+app.use(cors());
 
 app.use((req, res, next) => {
 	const error = new Error("Not found");
